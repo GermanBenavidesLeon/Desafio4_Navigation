@@ -1,27 +1,27 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import { ButtonsSucces } from '../components/Buttons'
+import { FlatList, StyleSheet, View, Text } from 'react-native'
+import ListItems from '../components/ListItems'
+import { Entregas } from '../data/Entregas' 
 
-const ScreenListItems = ({ navigation }) => {
-  return (
-    <View style={styles.listItems}>
-        <Text style={styles.textList}>Listado de entregas</Text>
-            <View style={styles.entregas}>
-                <View style={styles.listEntregas}>
-                    <Text style={styles.textItems}>1. Domicilio: Calle falsa</Text>
-                    <ButtonsSucces text='Ver entrega' onPress={ () => {
-                        navigation.navigate('Detail')
-                    }}/>
-                </View>
-                <View style={styles.listEntregas}>
-                    <Text style={styles.textItems}>2. Domicilio: Calle Falsa</Text>
-                    <ButtonsSucces text='Ver entrega' onPress={ () => {
-                        navigation.navigate('Detail')
-                    }}/>
-                </View>
-            </View>
-    </View>
-  )
+const ScreenListItems = ({navigation}) => {
+    
+    const listDirecciones = (item) => {
+        navigation.navigate('Detail', {
+            entregasID: item.id,
+        })
+    }
+   const renderItemList = ({item}) => <ListItems item={item} onSelected={listDirecciones}/>
+    
+    return (
+        <View style={styles.listItems}>
+            <Text style={styles.textList}>Listado de entregas</Text>
+                <FlatList
+                    data={Entregas}
+                    keyExtractor={ item => item.id }
+                    renderItem={renderItemList}
+                />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -35,23 +35,6 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontFamily: 'OpenSansBold'
     },
-    entregas: {
-        backgroundColor: '#ffeb3b',
-        width: 340,
-        height: '80%',
-        marginVertical: 20,
-    },
-    listEntregas: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        margin: 10,
-    },
-    textItems: {
-        fontSize: 16,
-        fontFamily: 'OpenSansRegular',
-        marginRight: 6,
-    } 
-
 })
+
 export default ScreenListItems

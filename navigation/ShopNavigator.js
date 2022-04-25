@@ -11,7 +11,17 @@ const Stack = createNativeStackNavigator();
 const ShopNavigator = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Home'
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#ffeb3b',
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold'
+              }
+            }}
+        >
             <Stack.Screen name='Home' component={ScreenHome}/>
             <Stack.Screen name='Lista' component={ScreenListItems}/>
             <Stack.Screen name='Detail' component={ScreenItemDetail}/>

@@ -1,28 +1,25 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { ButtonsCancelar, ButtonsIngresar } from '../components/Buttons'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
+import ItemDetail from '../components/ItemDetail'
+import { Entregas } from '../data/Entregas' 
 
-const ScreenItemDetail = ({ navigation }) => {
+const ScreenItemDetail = () => {
+   
+  const renderVerEntrega = ({item}) => (<ItemDetail item={item} />)
+
   return (
     <View style={styles.itemDetail}>
         <Text style={styles.textDetail}>Entrega Detalle</Text>
         <View style={styles.ubicacion}>
           <Text style={styles.textUbicacion}>Ubicacion</Text>
         </View>
-        <View style={styles.detalle}> 
-          <View>
-            <Text style={styles.textPaquetes}>Direccion: calle falsa</Text>
-            <Text style={styles.textPaquetes}>Usuario: John Doe</Text>
-          </View>
-          <View style={styles.botones}>
-            <ButtonsIngresar text='Entregado' onPress={ () => {
-                        alert('Envio Entregado!')}}/>
-            <ButtonsCancelar text='No entregado' onPress={ () => {
-                        navigation.navigate('Home')
-                    }}/>
-          </View>
-        </View>
+        <FlatList
+          data={Entregas}
+          keyExtractor={item => item.id}
+          renderItem={renderVerEntrega}
+        />
     </View>
+    
   )
 }
 
@@ -49,10 +46,15 @@ const styles = StyleSheet.create({
     },
     detalle: {
       backgroundColor: '#ffeb3b',
-      width: 300,
+      width: 320,
       height: '50%',
       marginVertical: 20,
       padding: 10,
+      borderRadius: 10
+    },
+    textDetalle: {
+      marginLeft: 20,
+      marginTop: 5
     },
     textPaquetes: {
       fontSize: 18,
@@ -62,7 +64,9 @@ const styles = StyleSheet.create({
     }, 
     botones: {
       flexDirection: 'row',
-      marginTop: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 25,
     }
 })
 

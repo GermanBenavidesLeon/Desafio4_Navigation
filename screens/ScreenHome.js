@@ -8,7 +8,7 @@ const ScreenHome = ({ navigation }) => {
         <Text style={styles.textHome}>Hola Bienvenidos!</Text>
         <View style={styles.Qrpaquete}>
         </View>
-        <ButtonsStart text='QR scanea tu paquete' onPress={ () => {
+        <ButtonsStart text='QR scanea las entregas' onPress={ () => {
             navigation.navigate('Lista')
         }}/>
     </View>
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         marginTop: 20,
+        borderRadius: 10,
     }
 
 })
